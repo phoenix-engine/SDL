@@ -311,6 +311,15 @@ SDL_memset(SDL_OUT_BYTECAP(len) void *dst, int c, size_t len)
 #endif /* HAVE_MEMSET */
 }
 
+#if !defined(HAVE_MEMSET)
+#pragma function(memset)
+void *
+memset(void *dst, int c, size_t len)
+{
+    return SDL_memset(dst, c, len);
+}
+#endif /* HAVE_MEMSET */
+
 void *
 SDL_memcpy(SDL_OUT_BYTECAP(len) void *dst, SDL_IN_BYTECAP(len) const void *src, size_t len)
 {
